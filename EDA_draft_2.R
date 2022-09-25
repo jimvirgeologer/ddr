@@ -34,7 +34,7 @@ library(data.table)
 
   
   
-  df <- lapply(file.list_all[c(1,16,163)], df_read) %>% bind_rows %>% as.data.frame()
+  df <- lapply(file.list_all, df_read) %>% bind_rows %>% as.data.frame()
   
 
   
@@ -100,7 +100,7 @@ library(data.table)
     arrange(DATE,desc(x = SHIFT))
   
   remove <- with(df_02,(FROM == 0) & (INTERVAL >= 150))
-  df_02 <- df_01[!remove,]
+  df_02 <- df_02[!remove,]
   
   df_03 <- df_02 %>% group_by(FILE,UNIT,HOLE_ID,DATE,SHIFT,DRILLER) %>%
     summarize(FROM = min(FROM),
